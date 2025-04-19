@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mysql-db:
     image: mysql:latest
-    container_name: mysql-container
+    container_name: mysql-container-${BUILD_NUMBER}
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: has@2004  # ✅ Set a root password
