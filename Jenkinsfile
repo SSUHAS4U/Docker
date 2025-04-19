@@ -15,21 +15,21 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 echo 'Building Docker Images for frontend and backend...'
-                sh 'docker-compose build'
+                bat 'docker-compose build'
             }
         }
 
         stage('Run Docker Containers') {
             steps {
                 echo 'Running Docker containers using docker-compose...'
-                sh 'docker-compose up -d'
+                bat 'docker-compose up -d'
             }
         }
 
         stage('Check Running Services') {
             steps {
                 echo 'Checking running containers...'
-                sh 'docker ps'
+                bat 'docker ps'
             }
         }
     }
