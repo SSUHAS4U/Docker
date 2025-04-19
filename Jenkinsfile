@@ -21,6 +21,9 @@ pipeline {
 
         stage('Run Docker Containers') {
             steps {
+                echo 'Stopping existing containers (if any)...'
+                bat 'docker-compose down --volumes --remove-orphans'
+
                 echo 'Running Docker containers using docker-compose...'
                 bat 'docker-compose up -d'
             }
