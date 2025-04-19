@@ -3,13 +3,12 @@ version: '3.8'
 services:
   mysql-db:
     image: mysql:latest
-    container_name: mysql-container-${BUILD_NUMBER}
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: has@2004  # ✅ Set a root password
-      MYSQL_DATABASE: project        # ✅ Optional: Create a database automatically
-      MYSQL_USER: cduser             # ✅ Optional: Create a user
-      MYSQL_PASSWORD: has@2004       # ✅ Optional: Set user password
+      MYSQL_ROOT_PASSWORD: has@2004
+      MYSQL_DATABASE: project
+      MYSQL_USER: cduser
+      MYSQL_PASSWORD: has@2004
     ports:
       - "3307:3306"
     volumes:
@@ -17,7 +16,6 @@ services:
 
   backend:
     build: ./backend
-    container_name: springboot-container
     restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/project
@@ -30,7 +28,6 @@ services:
 
   frontend:
     build: ./frontend
-    container_name: react-container
     restart: always
     ports:
       - "3000:80"
