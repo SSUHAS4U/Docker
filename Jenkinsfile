@@ -8,28 +8,31 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-username/your-repo.git'
+                git 'https://github.com/SSUHAS4U/Docker.git'
             }
         }
 
         stage('Build Docker Images') {
             steps {
                 echo 'Building Docker Images for frontend and backend...'
-                sh 'docker-compose build'
+                bat 'docker-compose build'
             }
         }
 
         stage('Run Docker Containers') {
             steps {
+                echo 'Stopping existing containers (if any)...'
+                bat 'docker-compose down --volumes --remove-orphans'
+
                 echo 'Running Docker containers using docker-compose...'
-                sh 'docker-compose up -d'
+                bat 'docker-compose up -d'
             }
         }
 
         stage('Check Running Services') {
             steps {
                 echo 'Checking running containers...'
-                sh 'docker ps'
+                bat 'docker ps'
             }
         }
     }
