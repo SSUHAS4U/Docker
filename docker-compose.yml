@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql-db:
-    image: mysql:latest
+    image: mysql:8.0   # better to lock a stable version, not latest
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: has@2004
@@ -10,9 +10,14 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: has@2004
     ports:
-      - "3307:3306"    # this is only for external access (e.g., for your local MySQL Workbench)
+      - "3307:3306"    # local 3307 → container 3306
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build: ./backend
@@ -24,7 +29,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysql-db
+      mysql-db:
+        condition: service_healthy   # wait for mysql-db to be healthy before starting backend
 
   frontend:
     build: ./frontend
