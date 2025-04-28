@@ -10,7 +10,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: has@2004
     ports:
-      - "3308:3307"
+      - "3308:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
@@ -18,7 +18,7 @@ services:
     build: ./backend
     restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3307/project
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/project
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: has@2004
     ports:
