@@ -7,7 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: has@2004
       MYSQL_DATABASE: project
-      MYSQL_USER: cduser
+      MYSQL_USER: root
       MYSQL_PASSWORD: has@2004
     ports:
       - "3308:3306"
